@@ -1,0 +1,3 @@
+- cargo new gencode-with-cargo-03
+- cargo run
+- 
