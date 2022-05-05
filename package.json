@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "@solana/buffer-layout": "^4.0.0"
+  }
+}
