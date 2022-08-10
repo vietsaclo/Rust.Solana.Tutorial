@@ -10,7 +10,7 @@ fn process_instruction(
   instruction_data: &[u8],
 ) -> ProgramResult{
 
-  let (key, rem)= instruction_data.split_first().unwrap(); 
+  let (_key, rem)= instruction_data.split_first().unwrap(); 
  
   let value: u64 = rem
   .get(0..8)

@@ -48,6 +48,7 @@ pub fn process_instruction(
     msg!("Greeted account does not have the correct program id");
     return Err(ProgramError::IncorrectProgramId);
   }
+  msg!("programId: {:?}", program_id);
 
   // Increment and store the number of times the account has been greeted
   let mut greeting_account = GreetingAccount::try_from_slice(&account.data.borrow())?;

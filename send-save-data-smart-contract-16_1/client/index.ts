@@ -39,8 +39,8 @@ const GREETING_SIZE = borsh.serialize(
 const connection = new web3.Connection(web3.clusterApiUrl("devnet"));
 
 async function main() {
-  const key: Uint8Array = Uint8Array.from([219, 210, 194, 18, 224, 215, 124, 229, 48, 223, 161, 2, 248, 230, 185, 106, 66, 4, 222, 67, 87, 150, 75, 89, 112, 142, 137, 31, 4, 199, 43, 216, 254, 238, 138, 192, 102, 178, 9, 182, 227, 37, 168, 221, 11, 186, 208, 72, 247, 90, 11, 204, 47, 118, 105, 115, 65, 4, 109, 61, 29, 203, 119, 104]);
-
+  // const key: Uint8Array = Uint8Array.from([85,235,184,154,115,49,48,92,245,61,221,192,59,79,10,150,61,50,98,136,11,171,198,7,80,182,119,135,53,193,99,164,70,64,63,26,76,125,14,140,14,235,103,237,136,117,75,250,178,64,126,58,198,210,253,112,50,10,0,83,21,102,124,173]);
+  const key: Uint8Array = Uint8Array.from([47, 107, 236, 147, 222, 225, 75, 61, 193, 86, 120, 5, 211, 78, 245, 241, 29, 213, 133, 195, 172, 70, 117, 100, 16, 212, 238, 204, 106, 188, 34, 185, 222, 149, 136, 29, 228, 132, 1, 164, 115, 250, 15, 250, 143, 55, 192, 136, 140, 215, 12, 35, 250, 31, 67, 247, 54, 163, 172, 228, 179, 241, 30, 67]);
 
   const data_to_send: Buffer = Buffer.from(
 
@@ -57,24 +57,24 @@ async function main() {
   //NO
   const layout = BufferLayout.struct([BufferLayout.u32("counter")])
   let data: Buffer = Buffer.alloc(layout.span);
-  layout.encode({ counter: 3 }, data);
+  layout.encode({ counter: 1 }, data);
 
 
   const signer: web3.Keypair = web3.Keypair.fromSecretKey(key);
-  let programId: web3.PublicKey = new web3.PublicKey("G5TNPLYcRPRWpg3NFMzpxij2GQuuLAY9MAsbkez3MThP");
+  let programId: web3.PublicKey = new web3.PublicKey("Aoe2UL2umvxfYLxqMz5GJSh68SrqBJdjxPUuHasDkSNz");
 
   // Derive the address (public key) of a greeting account from the program so that it's easy to find later.
 
   //first create account with seed then refer with Public Key
-  const GREETING_SEED = 'hello 41';
+  // const GREETING_SEED = 'hello 41';
   // greetedPubkey = await web3.PublicKey.createWithSeed(
   //   signer.publicKey,
   //   GREETING_SEED,
   //   programId,
   // );
 
-  greetedPubkey = new web3.PublicKey("8imh8apxXGYMhSP6D55eGAbhKjpjy2JpQJWJzKAM5wnb");
-
+  // greetedPubkey = new web3.PublicKey("3C5ew72q1nBY1bowgHDq4PNkDbiPcnJVxsJEm3Bz9ABu");
+  greetedPubkey = new web3.PublicKey('EXNDbkGj5C8ByCm7hLzMDVNd4RUHJUnh2cxTTqey1ibB');
 
   let fees = 0;
 
@@ -86,9 +86,9 @@ async function main() {
 
 
   //This creteAccount with Seed  only first time    
-  //  const transaction = new web3.Transaction()
+  let transaction = new web3.Transaction();
 
-  //  .add(
+  // transaction.add(
   //   web3.SystemProgram.createAccountWithSeed({
   //     fromPubkey: signer.publicKey,
   //     basePubkey: signer.publicKey,
@@ -100,30 +100,20 @@ async function main() {
   //   }),
   // );
 
-
-  let transaction: web3.Transaction = new web3.Transaction();
   transaction.add(
     new web3.TransactionInstruction({
       keys: [
         { pubkey: greetedPubkey, isSigner: false, isWritable: true }],
       programId,
       data: data
-
-
     })
   );
-  // const transaction = new web3.Transaction().add(
+  // transaction.add(
   //   new web3.TransactionInstruction({
-  //       keys: [{
-  //         "pubkey": signer.publicKey
-  //         ,
-  //         "isSigner": true,
-  //         "isWritable": true
-  //          }],
-  //       programId,
-  //       data
-
-
+  //     keys: [
+  //       { pubkey: signer.publicKey, isSigner: false, isWritable: true }],
+  //     programId,
+  //     data: data
   //   })
   // );
 
