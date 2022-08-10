@@ -7,7 +7,7 @@ async function main() {
   const signer = web3.Keypair.fromSecretKey(key);
 
   // contract address
-  const contractAddress = '6vGD4DYtR2GuuYd2qeVVSBN3zNmBrHTDeLEZrUrG4Phe';
+  const contractAddress = 'FLEAeP69UMWX6wJzPBc2JPGtjSiMH2pTT7gCoc8WzTka';
   const program_id: web3.PublicKey = new web3.PublicKey(contractAddress);
 
   let transaction = new web3.Transaction();
